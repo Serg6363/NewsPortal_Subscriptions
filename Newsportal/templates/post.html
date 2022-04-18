@@ -1,0 +1,26 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_filters %}
+
+{% block title %}
+Products
+{% endblock title %}
+
+{% block content %}
+<h1> {{ post.title }} </h1>
+    <hr>
+{{ post.text }}
+    <hr>
+{{ post.time_write | date:'d-M-Y h:i' }}
+<hr>
+{% for cat in categories_post.all %}
+    <li> {{ cat.name_category }}
+        <form action="/sign/subscriptions.html">
+            <button class="button">Подписаться</button>
+        </form>
+    </li>
+{% endfor %}
+<br>
+    <a href="{% url 'post_edit' post.id %}"><u>Редактировать</u></a><br>
+    <a href="{% url 'post_delete' post.id %}"><u>Удалить публикацию</u></a>
+{% endblock content %}
